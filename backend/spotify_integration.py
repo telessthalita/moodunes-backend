@@ -34,7 +34,9 @@ def criar_playlist_contextualizada(sp, session):
         }
         
         params = params_map.get(session['humor'], params_map['neutro'])
-        query = f"{params['keywords']} genre:{random.choice(params['genres'])}"
+        query = f"{random.choice(['happy', 'sad', 'chill', 'party'])} {random.choice(params['genres'])}"
+
+
 
         results = sp.search(
             q=query,
