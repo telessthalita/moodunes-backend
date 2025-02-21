@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 from flasgger import Swagger
 from chatbot import analisar_sentimento, gerar_resposta_contextualizada
 from spotify_integration import obter_spotify_client, criar_playlist_contextualizada
+from flask_session import Session 
 
 load_dotenv()
 app = Flask(__name__)
