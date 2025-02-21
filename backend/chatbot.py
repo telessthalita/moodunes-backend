@@ -5,23 +5,24 @@ import json
 def analisar_sentimento(texto):
     texto = texto.lower()
     blob = TextBlob(texto)
-    
+
     keywords = {
-        'feliz': ['feliz', 'alegre', 'ótimo', 'maravilhoso', 'animado', 'sorrindo'],
-        'triste': ['triste', 'pessimo', 'horrível', 'deprimido', 'chateado', 'chorando'],
-        'neutro': ['normal', 'ok', 'tranquilo', 'indiferente', 'meh', 'tanto faz']
+        'feliz': ['feliz', 'alegre', 'ótimo', 'maravilhoso', 'animado', 'sorrindo', 'bom', 'divertido'],
+        'triste': ['triste', 'péssimo', 'horrível', 'deprimido', 'chateado', 'chorando', 'mal', 'cansado'],
+        'neutro': ['normal', 'ok', 'tranquilo', 'indiferente', 'meh', 'tanto faz', 'neutro']
     }
 
     for mood, words in keywords.items():
-        if any(word in texto for word in words):
+        if any(word in texto.split() for word in words):  # Verifica palavra exata
             return mood
 
     polarity = blob.sentiment.polarity
-    if polarity > 0.3:
+    if polarity > 0.2:
         return 'feliz'
-    elif polarity < -0.3:
+    elif polarity < -0.2:
         return 'triste'
     return 'neutro'
+
 
 def gerar_resposta_contextualizada(session):
     nome = session.get('nome', 'Amigo')
